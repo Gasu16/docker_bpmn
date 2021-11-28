@@ -1,0 +1,31 @@
+version: '3'
+services:
+  bpmn2drools:
+    tty: true
+    stdin_open: true
+    build: 
+      context: ./
+      dockerfile: Dockerfile 
+    container_name: bpmn2drools
+    environment: 
+      #- /tmp/.docker.xauth
+      #- /tmp/.X11-unix/
+      - /home/matt/.Xauthority
+    volumes:
+      - /tmp/.docker.xauth
+      - /tmp/.X11-unix/
+    ports:
+         - 5001:80
+    command: java --module-path /root/OpenJFX/javafx-sdk-17.0.0.1/lib --add-modules=javafx.controls,javafx.fxml -jar target/Translator-1.0-SNAPSHOT-jar-with-dependencies.jar 
+  clean-maven:
+    working_dir: /CleanMaven/cleanmaven
+    tty: true
+    stdin_open: true
+    build:
+      context: ./
+    container_name: cleanmaven
+    volumes:
+      - ./cleanmaven:/usr/src/app
+    ports: 
+        - 5000:80
+          #command: ./offchain
