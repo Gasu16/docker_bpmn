@@ -1,20 +1,27 @@
-version: '3.3'
+version: '3'
 services:
-    docker_bpmn:
-        volumes:
-            - '$XSOCK:/tmp/.X11-unix/'
-            - '$XAUTH:/tmp/.docker.xauth'
-        environment:
-            - XAUTHORITY=/tmp/.docker.xauth
-        container_name: docker_bpmn
-        image: docker_bpmn
-        command: java --module-path /root/OpenJFX/javafx-sdk-17.0.0.1/lib --add-modules=javafx.controls,javafx.fxml -jar target/Translator-1.0-SNAPSHOT-jar-with-dependencies.jar
-    clean-maven:
-      working_dir: /CleanMaven/cleanmaven
-      tty: true
-      stdin_open: true
-      build:
-        context: ./
-      container_name: cleanmaven
-      volumes:
-        - ./cleanmaven:/usr/src/app
+  bpmn-drools:
+    working_dir: /root/Bpmn
+    tty: true
+    stdin_open: true
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: bpmn2drools2
+    volumes:
+      - ./bpmn2drools:/usr/src/app
+    ports:
+         - 5001:80 
+  clean-maven:
+    working_dir: /root/CleanMaven/cleanmaven
+    tty: true
+    stdin_open: true
+    build:
+      context: ./
+    container_name: cleanmaven
+    volumes:
+      - ./cleanmaven:/usr/src/app
+    ports: 
+        - 5000:80
+    #command: mvn exec:java -Dexec.mainClass="org.example.ProcessTest"
+    command: java -jar FlexChain_Processor.jar
