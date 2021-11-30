@@ -2,7 +2,8 @@
 export XSOCK=/tmp/.X11-unix/
 export XAUTH=/tmp/.docker.xauth
 export XAUTHORITY=~/.Xauthority
-xhost local:root
+xhost local:admin
+#xhost local:root
 
 # Qui runniamo la GUI
 sudo docker build -t docker_bpmn - < Dockerfile
