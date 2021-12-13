@@ -1,0 +1,28 @@
+#!/bin/bash
+#export XSOCK=/tmp/.X11-unix/
+#export XAUTH=/tmp/.docker.xauth
+#export XAUTHORITY=~/.Xauthority
+xhost local:admin
+#xhost local:root
+
+# Qui runniamo la GUI
+sudo docker build -t docker_bpmn - < Dockerfile
+
+sudo docker compose build
+sudo docker compose up
+#sudo docker run -ti -v $XSOCK:$XSOCK -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH --rm --name docker_bpmn docker_bpmn
+#echo "GUI RUNNATA"
+
+# Gettiamo l'IP di dockerbpmn (alias mydocker)
+#sudo docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' my_bpmn_docker
+
+#sudo docker inspect mydocker | grep IPAddress
+
+# Qui runniamo l'offchain
+#sudo docker build -t cleanmaven - < offchain-build/Dockerfile
+#sudo docker run -ti -v $XSOCK:$XSOCK -v $XAUTH:$XAUTH -e XAUTHORITY=$XAUTH cleanmaven
+#echo "offchain runnata"
+
+
+#sudo docker run -ti -v /tmp/.X11-unix:/tmp/.X11-unix -v /tmp/.docker.xauth:/tmp/.docker.xauth -e DISPLAY=$DISPLAY test_eleven
+#sudo docker run -ti -v /tmp/.X11-unix:/tmp/.X11-unix -v /tmp/.docker.xauth:/tmp/.docker.xauth -e DISPLAY=$DISPLAY -e XAUTHORITY=/tmp/.docker.xauth test_eleven
