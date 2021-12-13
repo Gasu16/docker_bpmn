@@ -1,32 +1,20 @@
-version: '3'
+version: '3.3'
 services:
-  bpmn-drools:
-    working_dir: /home/admin/Bpmn
-    tty: true
-    stdin_open: true
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    container_name: bpmn2drools2
-    volumes:
-     - ./bpmn2drools:/usr/src/app
-    ports:
-     - 5001:80
-    #command:
-     #- /bin/bash
-     #- -c
-     #- ${git1}
-     #- java --module-path /home/admin/OpenJFX/javafx-sdk-17.0.0.1/lib --add-modules=javafx.controls,javafx.fxml -jar target/Translator-1.0-SNAPSHOT-jar-with-dependencies.jar
-  clean-maven:
-    working_dir: /home/admin/CleanMaven/cleanmaven
-    tty: true
-    stdin_open: true	
-    build:
-      context: ./
-    container_name: cleanmaven
-    volumes:
-      - ./cleanmaven:/usr/src/app
-    ports: 
-        - 5000:80
-    command: java -jar target/cleanmaven-1.0-SNAPSHOT-jar-with-dependencies.jar 
-    #${git2} 
+    docker_bpmn:
+        volumes:
+            - '$XSOCK:/tmp/.X11-unix/'
+            - '$XAUTH:/tmp/.docker.xauth'
+        environment:
+            - XAUTHORITY=/tmp/.docker.xauth
+        container_name: docker_bpmn
+        image: docker_bpmn
+        command: java --module-path /home/admin/OpenJFX/javafx-sdk-17.0.0.1/lib --add-modules=javafx.controls,javafx.fxml -jar target/Translator-1.0-SNAPSHOT-jar-with-dependencies.jar
+    clean-maven:
+      working_dir: /CleanMaven/cleanmaven
+      tty: true
+      stdin_open: true
+      build:
+        context: ./
+      container_name: cleanmaven
+      volumes:
+        - ./cleanmaven:/usr/src/app
