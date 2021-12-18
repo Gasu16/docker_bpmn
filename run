@@ -1,7 +1,7 @@
 #!/bin/bash
 xhost local:admin
 
-sudo docker build -t docker_bpmn - < Dockerfile 
+sudo docker build -t docker_bpmn - < Dockerfile --no-cache
 
 sudo docker compose build
 sudo docker compose up

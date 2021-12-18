@@ -10,12 +10,12 @@ services:
         image: docker_bpmn
         command: java --module-path /home/admin/OpenJFX/javafx-sdk-17.0.0.1/lib --add-modules=javafx.controls,javafx.fxml -jar target/Translator-1.0-SNAPSHOT-jar-with-dependencies.jar
     clean-maven:
-      working_dir: /CleanMaven/cleanmaven
+      working_dir: /OffChainProcessor/offchainprocessor
         #tty: true
         #stdin_open: true
       build:
         context: ./
-      container_name: cleanmaven
-      volumes:
-        - ./cleanmaven:/usr/src/app
-      command: java -jar target/cleanmaven-1.0-SNAPSHOT-jar-with-dependencies.jar
+      container_name: offchainprocessor
+        #volumes:
+        #- ./offchainprocessor:/target
+      command: java -jar /home/admin/OffChainProcessor/offchainprocessor/target/offchainprocessor-1.0-SNAPSHOT-jar-with-dependencies.jar
