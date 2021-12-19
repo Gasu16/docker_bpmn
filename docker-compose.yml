@@ -2,25 +2,17 @@ version: '3.3'
 services:
   bpmn-drools:
     working_dir: /home/admin/DockerFlexchain
-    tty: true
-    stdin_open: true
     build:
       context: ./
       dockerfile: Dockerfile
     container_name: DockerFlexchain
     volumes:
      - ./DockerFlexchain:/usr/src/app
-    ports:
-     - 5001:80
   offchain-processor:
     working_dir: /home/admin/OffChainProcessor/offchainprocessor
-    tty: true
-    stdin_open: true	
     build:
       context: ./
-    container_name: OffChainProcessor
+    container_name: offchainprocessor
     volumes:
       - ./OffChainProcessor:/usr/src/app
-    ports: 
-     - 5000:80
     command: java -jar target/offchainprocessor-1.0-SNAPSHOT-jar-with-dependencies.jar
