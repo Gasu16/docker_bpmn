@@ -18,4 +18,4 @@ services:
       container_name: offchainprocessor
         #volumes:
         #- ./offchainprocessor:/target
-      command: java -jar /home/admin/OffChainProcessor/offchainprocessor/target/offchainprocessor-1.0-SNAPSHOT-jar-with-dependencies.jar
+      command: java -jar /home/admin/OffChainProcessor/target/offchainprocessor-1.0-SNAPSHOT-jar-with-dependencies.jar
