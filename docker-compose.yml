@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+  docker_bpmn:
+    working_dir: /home/admin/DockerFlexchain
+    container_name: DockerFlexchain
+    image: matteotoma98/dockerflexchain:latest
+  offchain-processor:
+    working_dir: /OffChainProcessor/offchainprocessor
+    container_name: offchainprocessor
+    image: matteotoma98/offchainprocessor:latest
+    command: java -jar /home/admin/OffChainProcessor/target/offchainprocessor-1.0-SNAPSHOT-jar-with-dependencies.jar
